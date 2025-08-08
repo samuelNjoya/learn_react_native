@@ -1,21 +1,35 @@
-const { View, Text, StyleSheet, FlatList, ImageBackground } = require("react-native")
+const { View, Text, StyleSheet, FlatList, ImageBackground, TouchableOpacity} = require("react-native")
 import houseList from '@/assets/data/data-appartement.json'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import React from 'react'
+import { Alert } from 'react-native';
+import { router } from 'expo-router';
 
-const appartementList = () => {
+
+const AppartementList = () => {
+
+    const appartementOpen = () => {
+        try {
+            Alert.alert("ça marche");
+            router.replace("/components");
+        } catch (e) {
+            console.error("Errer dans App", e)
+        }
+    };
+
     return (
         <FlatList
             data={houseList}
             horizontal
-            contentContainerStyle={{ gap: 25, marginLeft: 20, paddingRight: 40, backgroundColor:"white", }}
-            // keyExtractor={(item) =>
-            //     item.cover_image_url.toLowerCase.toString +
-            //     Math.floor(Math.random() * 1000)
-            // }
+            contentContainerStyle={{ gap: 25, marginLeft: 20, paddingRight: 40, backgroundColor: "white", }}
+            keyExtractor={(item) =>
+                item.cover_image_url.toLowerCase.toString +
+                Math.floor(Math.random() * 1000)
+            }
             showsHorizontalScrollIndicator={false}
+
             renderItem={({ item }) => (
-                <View style={styles.blocImg}>
+                <TouchableOpacity style={styles.blocImg} activeOpacity={0.8} onPress={appartementOpen}>
                     <ImageBackground
                         source={{ uri: item.cover_image_url }}
                         resizeMode="cover"
@@ -45,41 +59,39 @@ const appartementList = () => {
                             </View>
                         </View>
                     </View>
-                </View>
+                </TouchableOpacity>
             )}
         />
     )
 }
 
 const styles = StyleSheet.create({
-
-
-  blocImg: {
-    width: 320,
-  },
-  maison: {
-    height: 200,
-    borderRadius: 30,
-    overflow: "hidden", //pour afficher le radius
-  },
-  tagTex: {
-    color: "white",
-    padding: "15",
-    fontWeight: "700",
-  },
-  // style pour display flex
-  dflex:{
-    flexDirection:"row",
-    alignItems:"center",
-    justifyContent:"space-between",
-    marginTop:13,
-  },
-  d_start:{
-    backgroundColor:"gray",
-    flexDirection:"row",
-    gap:10,
-  },
+    blocImg: {
+        width: 320,
+    },
+    maison: {
+        height: 200,
+        borderRadius: 30,
+        overflow: "hidden", //pour afficher le radius
+    },
+    tagTex: {
+        color: "white",
+        padding: "15",
+        fontWeight: "700",
+    },
+    // style pour display flex
+    dflex: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginTop: 13,
+    },
+    d_start: {
+        backgroundColor: "gray",
+        flexDirection: "row",
+        gap: 10,
+    },
 
 });
 
-export default appartementList
+export default AppartementList

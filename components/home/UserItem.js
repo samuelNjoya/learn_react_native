@@ -1,9 +1,16 @@
 import React from 'react'
-import { Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native'
+
+
 
 const UserItem = ({ user }) => {
+
+    const detail = () => {
+        alert(user.id.toString());
+    }
+
     return (
-        <TouchableOpacity style={styles.root}>
+        <TouchableOpacity style={styles.root} onPress={detail}>
             <Text>
                 <Image
                     source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtP2dJg1mSqTYwwlSkDNeQMAdPp1g_pZPJg&s" }}
@@ -26,7 +33,7 @@ const styles = StyleSheet.create({
     image: {
         width: 70,
         height: 70,
-        borderRadius:10,
+        borderRadius: 10,
     },
 });
 
