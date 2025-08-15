@@ -1,10 +1,17 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, Alert, StyleSheet } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
+import houseList from '@/assets/data/data-appartement.json'
 
 export default function TestAlert() {
   const showAlert = () => {
     Alert.alert("Ça marche !");
   };
+
+const { id } = useLocalSearchParams();
+const house = houseList.find((houseItem) => houseItem.id === parseInt(id));
+
+console.log(house);
 
   return (
     <View style={styles.container}>
